@@ -1,10 +1,13 @@
 # ===========================================================
-# Makefile for lsv1.1.0 Project (Feature 2 - Long Listing)
+# Makefile for ls Project (v1.2.0 - Column Display)
 # ===========================================================
 
 # Compiler and flags
 CC = gcc
-CFLAGS = -Wall -Wextra -std=c99
+CFLAGS = -Wall -Wextra -std=c99 -D_POSIX_C_SOURCE=200809L
+
+# Version (update this for each new feature)
+VERSION = 1.2.0
 
 # Directories
 SRC_DIR = src
@@ -12,9 +15,9 @@ OBJ_DIR = obj
 BIN_DIR = bin
 
 # Files
-SRC = $(SRC_DIR)/lsv1.1.0.c
-OBJ = $(OBJ_DIR)/lsv1.1.0.o
-TARGET = $(BIN_DIR)/ls
+SRC = $(SRC_DIR)/lsv$(VERSION).c
+OBJ = $(OBJ_DIR)/lsv$(VERSION).o
+TARGET = $(BIN_DIR)/lsv$(VERSION)
 
 # ===========================================================
 # Default target
@@ -30,14 +33,15 @@ $(TARGET): $(OBJ) | $(BIN_DIR)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Create directories if not exist
+# Create directories if they don't exist
 $(OBJ_DIR) $(BIN_DIR):
 	mkdir -p $@
 
 # Clean up build files
 clean:
-	rm -f $(OBJ_DIR)/*.o $(TARGET)
+	rm -f $(OBJ_DIR)/*.o $(BIN_DIR)/*
 	@echo "🧹 Cleaned up build files."
 
 # Phony targets
 .PHONY: all clean
+
