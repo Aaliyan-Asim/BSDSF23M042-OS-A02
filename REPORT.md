@@ -112,3 +112,35 @@ After printing, the program frees every string and the main array to prevent mem
 ---
 
 
+
+---
+
+## Version 1.3.0 — Horizontal Column Display (-x)
+
+### Q1. Compare the implementation complexity of the "down then across" (vertical) printing logic versus the "across" (horizontal) printing logic. Which one requires more pre-calculation and why?
+
+The **"down then across" (vertical)** printing logic is more complex because it requires pre-calculating both the number of columns and rows, then indexing the filenames in a two-dimensional layout (using the formula `index = column * num_rows + row`). This means you need to carefully compute how many items fit vertically in each column before printing.
+
+In contrast, the **"across" (horizontal)** logic simply loops through the filenames from left to right and wraps when the terminal width limit is reached. It doesn’t require calculating the number of rows or managing complex indexing — just checking if the next filename exceeds the current terminal width.
+
+Therefore, **the vertical layout requires more pre-calculation** and is logically trickier to implement due to the need for coordinated row/column mapping.
+
+---
+
+### Q2. Describe the strategy you used in your code to manage the different display modes (-l, -x, and default). How did your program decide which function to call for printing?
+
+A simple **state management approach** was used through flag variables:
+
+
+- A `long_flag` is set when `-l` is detected.
+- A `horizontal_flag` is set when `-x` is detected.
+
+In the `main()` function, after parsing all command-line arguments, the program decides which display mode to use:
+
+```c
+if (long_flag)
+    print_long_listing(dir);
+else if (horizontal_flag)
+    print_horizontal_listing(dir);
+else
+    print_column_listing(dir);
