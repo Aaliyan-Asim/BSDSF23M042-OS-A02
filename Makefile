@@ -1,5 +1,5 @@
 # ===========================================================
-# Makefile for ls Project (v1.3.0 - Sorted Column Display)
+# Makefile for ls Project (v1.4.0 - Alphabetical Sort)
 # ===========================================================
 
 # Compiler and flags
@@ -7,7 +7,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -std=c99 -D_POSIX_C_SOURCE=200809L
 
 # Version (update this for each new feature)
-VERSION = 1.3.0
+VERSION = 1.4.0
 
 # Directories
 SRC_DIR = src

@@ -144,3 +144,12 @@ else if (horizontal_flag)
     print_horizontal_listing(dir);
 else
     print_column_listing(dir);
+
+## Version 1.4.0 – Alphabetical Sort
+
+**Q1:** Why is it necessary to read all directory entries into memory before you can sort them?  
+What are the potential drawbacks of this approach for directories containing millions of files?
+
+**Q2:** Explain the purpose and signature of the comparison function required by `qsort()`.  
+How does it work, and why must it take `const void *` arguments?
+
