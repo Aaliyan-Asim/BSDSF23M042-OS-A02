@@ -153,3 +153,40 @@ What are the potential drawbacks of this approach for directories containing mil
 **Q2:** Explain the purpose and signature of the comparison function required by `qsort()`.  
 How does it work, and why must it take `const void *` arguments?
 
+---
+
+### **Feature 6 – v1.5.0: Colorized Output**
+
+**Q1: How do ANSI escape codes work to produce color in a standard Linux terminal? Show the specific code sequence for printing text in green.**
+ANSI escape codes are special sequences of characters that tell the terminal to change text style, color, or formatting. They usually start with the escape character `\033[` followed by parameters and end with the letter `m`.
+For example, to print text in **green**, you can use:
+
+```c
+printf("\033[0;32mThis text is green!\033[0m\n");
+```
+
+Here:
+
+* `\033[` → begins the escape sequence
+* `0;32m` → sets normal text style (0) and green foreground color (32)
+* `\033[0m` → resets the color to default
+
+---
+
+**Q2: To color an executable file, you need to check its permission bits. Explain which bits in the `st_mode` field you need to check to determine if a file is executable by the owner, group, or others.**
+In the `st_mode` field of the `stat` structure, the **execute permission bits** are:
+
+* `S_IXUSR` → executable by **owner**
+* `S_IXGRP` → executable by **group**
+* `S_IXOTH` → executable by **others**
+
+If any of these bits are set (checked using bitwise AND `&`), the file can be considered executable.
+Example:
+
+```c
+if (fileStat.st_mode & (S_IXUSR | S_IXGRP | S_IXOTH)) {
+    // File is executable
+}
+```
+
+---
